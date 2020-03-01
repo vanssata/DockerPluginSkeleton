@@ -11,7 +11,3 @@ Feature: Statically greeting a customer
     Scenario: Statically greeting a customer with a known name
         When a customer named "Krzysztof" visits static welcome page
         Then they should be statically greeted with "Hello, Krzysztof!"
-
-    Scenario: Statically greeting Lionel Richie
-        When a customer named "Lionel Richie" visits static welcome page
-        Then they should be statically greeted with "Hello, is it me you're looking for?"

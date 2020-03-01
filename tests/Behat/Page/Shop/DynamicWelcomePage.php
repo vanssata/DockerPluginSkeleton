@@ -23,6 +23,17 @@ class DynamicWelcomePage extends SymfonyPage implements WelcomePageInterface
             return $greeting;
         });
     }
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogo()
+    {
+        $logo = $this->getSession()->getPage()->find('css','.ui.small.image')->check();
+        if(null === $logo){
+            return '';
+        }
+        return $logo;
+    }
 
     /**
      * {@inheritdoc}

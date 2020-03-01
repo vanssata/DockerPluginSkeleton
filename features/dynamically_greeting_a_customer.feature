@@ -15,3 +15,7 @@ Feature: Dynamically greeting a customer
     Scenario: Dynamically greeting Lionel Richie
         When a customer named "Lionel Richie" visits dynamic welcome page
         Then they should be dynamically greeted with "Hello, is it me you're looking for?"
+
+    Scenario: Dynamically greeting and check template
+        When a customer named "Lionel Richie" visits dynamic welcome page
+        Then they should be dynamically greeted with "Hello, is it me you're looking for?"

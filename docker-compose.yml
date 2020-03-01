@@ -6,6 +6,7 @@ services:
             dockerfile: .docker/php-fpm/Dockerfile
         expose:
             - "80"
+            - "8080"
         depends_on:
             - mariadb
         volumes:
@@ -14,6 +15,7 @@ services:
         command: php-fpm
         ports:
             - "80:80"
+            - "8080:8080"
         environment:
             - COMPOSER_MEORY_LIMIT=-1
             - COMPOSER_ALLOW_XDEBUG=1
@@ -33,3 +35,22 @@ services:
         ports:
             - "3306:3306"
 
+    hub:
+        image: selenium/hub:3.11.0
+        ports:
+            - 4444:4444
+        links:
+            - php-fpm
+    chrome:
+#        image: selenium/node-chrome:3.11.0
+        #  You can also use this image and open the  container port to one of your host port to be able to use a VNC viewer
+        image: selenium/node-chrome-debug:3.11.0
+        depends_on:
+            - hub
+        links:
+            - php-fpm
+        environment:
+            - HUB_HOST=hub
+            - HUB_PORT=4444
+        # ports:
+        #     - 5900:5900

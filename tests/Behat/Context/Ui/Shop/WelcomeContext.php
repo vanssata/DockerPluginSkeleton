@@ -77,4 +77,12 @@ final class WelcomeContext implements Context
     {
         Assert::same($this->dynamicWelcomePage->getGreeting(), $greeting);
     }
+
+    /**
+     * @Given /^a page have title$/
+     */
+    public function aPageHaveTitle()
+    {
+        Assert::notEmpty($this->dynamicWelcomePage->getLogo(),'Error');
+    }
 }
