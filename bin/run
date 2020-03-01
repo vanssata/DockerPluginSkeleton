@@ -1,0 +1,14 @@
+#!/bin/bash
+source $(dirname $0)/funct.sh
+
+env="${1:-dev}"
+ip="${2:-0.0.0.0}"
+prort="${3:-80}"
+
+
+run_command php-fpm "(cd tests/Application && yarn && yarn build) > /dev/null 2>&1"
+echo "================================================================================================================="
+run_command php-fpm "(cd tests/Application && ./bin/console server:stop)"
+echo "================================================================================================================="
+#run_command php-fpm "(cd tests/Application && ./bin/console server:start ${ip}:${prort} -d public -e ${env})"
+

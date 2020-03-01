@@ -1,0 +1,7 @@
+#!/bin/bash -e
+source $(dirname $0)/funct.sh
+
+run_command php-fpm 'composer install'
+run_command php-fpm '(cd tests/Application && bin/console doct:mig:migr -q --allow-no-migration --all-or-nothing)'
+run_command php-fpm '(cd tests/Application && bin/console sylius:fixtures:load -e dev)'
+run_command php-fpm '(cd tests/Application && yarn && yarn build)'

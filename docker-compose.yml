@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+    php-fpm:
+        build:
+            context:    .
+            dockerfile: .docker/php-fpm/Dockerfile
+        expose:
+            - "80"
+        depends_on:
+            - mariadb
+        volumes:
+            - ${PWD}/:/opt/app
+            - ${PWD}/.docker
+        command: php-fpm
+        ports:
+            - "80:80"
+        environment:
+            - COMPOSER_MEORY_LIMIT=-1
+            - COMPOSER_ALLOW_XDEBUG=1
+            - COMPOSER_DISABLE_XDEBUG_WARN=1
+
+    mariadb:
+        build:
+            context:    .
+            dockerfile: .docker/mysql/Dockerfile
+        environment:
+            MYSQL_ROOT_PASSWORD: DockerPluginSkeleton
+            MYSQL_DATABASE:      DockerPluginSkeleton
+            MYSQL_USER:          DockerPluginSkeleton
+            MYSQL_PASSWORD:      DockerPluginSkeleton
+        volumes:
+            - ${PWD}/.docker/mysql/data:/var/lib/mysql
+        ports:
+            - "3306:3306"
+
